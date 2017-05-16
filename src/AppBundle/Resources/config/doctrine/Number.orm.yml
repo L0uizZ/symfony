@@ -1,0 +1,20 @@
+AppBundle\Entity\Number:
+    type: entity
+    table: number
+    repositoryClass: AppBundle\Repository\NumberRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        createdAt:
+            type: datetime
+
+        number:
+            type: decimal
+            precision: '4'
+            scale: '2'
+            nullable: true
+    lifecycleCallbacks: {  }

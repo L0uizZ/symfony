@@ -1,0 +1,28 @@
+{# app/Resources/views/base.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Titel der Seite{% endblock %}</title>
+</head>
+{% block body %}
+
+<body>
+{% set value = random(1000) %}
+<div id="sidebar">
+    {% block sidebar %}
+        <ul>
+            <li><a href="/app_dev.php">Home</a></li>
+            <li><a href="/app_dev.php/lucky/number/{{ value }}">Random numbers</a></li><br/><br/>
+        </ul>
+            <form action="/app_dev.php/lucky/form" method="post">
+                <h3>DB POST FORMULAR</h3>
+                <p>Enter a number range(0,1000):<input type="text" name="numbrange" /></p>
+                <p><input type="submit" /></p>
+            </form>
+    {% endblock %}
+</div>
+
+</body>
+{% endblock %}
+</html>
