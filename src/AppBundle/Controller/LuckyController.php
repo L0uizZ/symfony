@@ -22,6 +22,8 @@ class LuckyController extends Controller
         }
 
     }
+
+
     public function formAction(Request $request)
     {
         $numbrange = $request->get('numbrange');
@@ -45,6 +47,7 @@ class LuckyController extends Controller
         }
     }
 
+
     public function findAction(Request $request)
     {
         $numberid = $request->get('contentid');
@@ -54,7 +57,7 @@ class LuckyController extends Controller
         $foundcontent = $repository->findById($numberid);
 
         if(!$dbcontent){
-            throw $this->createNotFoundException('No DB entry found for ID '.$numberid);
+            throw new \UnexpectedValueException('No DB entry found for ID '.$numberid);
         } else {
             echo '<b>Found an entry for ID </b>' .$numberid;
             return $this->render('lucky/luckydb.html.twig', array('dbtable' => $foundcontent));
@@ -63,20 +66,29 @@ class LuckyController extends Controller
         }
     }
 
+
     public function showAction()
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Number');
         $dbtable = $repository->findAll();
-
         return $this->render('lucky/luckydb.html.twig', array('dbtable' => $dbtable));
     }
+
 
     public function eraseAction(Request $request){
         $numberid = $request->get('contentid');
         $em = $this->getDoctrine()->getManager();
         $toerase = $em->getRepository('AppBundle:Number')->find($numberid);
-        $em->remove($toerase);
-        $em->flush();
-        return new Response("Erased entry with ID " .$numberid);
+
+        if(!$toerase)
+        {
+            throw new \UnexpectedValueException('No DB entry found for ID '.$numberid);
+
+        } else {
+
+            $em->remove($toerase);
+            $em->flush();
+            return new Response("Erased entry with ID " .$numberid);
+        }
     }
 }
