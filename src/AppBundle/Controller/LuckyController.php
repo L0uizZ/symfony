@@ -39,25 +39,35 @@ class LuckyController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($dbwriter);
             $em->flush();
-
-            #bekommt keine id?!
-            echo 'ID: '.$dbwriter->getId();
-
+            echo '<i>SAVED YOUR NUMBER IN DB</i>';
             return $this->render('lucky/number.html.twig', array('number' => $formnumb));
 
         }
     }
 
-    public function showAction(Request $request)
+    public function findAction(Request $request)
     {
         $numberid = $request->get('contentid');
-        $dbcontent = $this->getDoctrine()->getRepository('AppBundle:Number')->find($numberid);
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Number');
+        $dbcontent = $repository->find($numberid);
+
+        $foundcontent = $repository->findById($numberid);
 
         if(!$dbcontent){
-            throw $this->createNotFoundException('No DB content found for id '.$numberid);
+            throw $this->createNotFoundException('No DB entry found for ID '.$numberid);
         } else {
-             return new Response('successfully found content for id ' .$numberid);
+            echo '<b>Found an entry for ID </b>' .$numberid;
+            return $this->render('lucky/luckydb.html.twig', array('dbtable' => $foundcontent));
+
 
         }
+    }
+
+    public function showAction()
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Number');
+        $dbtable = $repository->findAll();
+
+        return $this->render('lucky/luckydb.html.twig', array('dbtable' => $dbtable));
     }
 }
