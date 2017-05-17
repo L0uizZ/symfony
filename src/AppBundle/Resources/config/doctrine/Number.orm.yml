@@ -13,8 +13,6 @@ AppBundle\Entity\Number:
             type: datetime
 
         number:
-            type: decimal
-            precision: '4'
-            scale: '2'
+            type: integer
             nullable: true
     lifecycleCallbacks: {  }

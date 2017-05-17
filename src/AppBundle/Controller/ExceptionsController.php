@@ -12,6 +12,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ExceptionsController extends Controller
 {
   public function showExceptionsAction(){
+
+
+
       return $this->render('error/404.html.twig');
   }
 }

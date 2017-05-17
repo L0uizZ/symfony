@@ -1,0 +1,16 @@
+{# app/Ressources/views/lucky/number.html.twig #}
+<table>
+    <h3>Lucky Numbers DB</h3>
+    <h4>Entries:</h4>
+    {% for c in dbtable %}
+        <tr>
+            <td>ID: {{ c.id }}</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>NUMBER: {{ c.number }}</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>CREATED: {{ c.createdAt.format('d.m.Y H:i:s') }}</td>
+        </tr>
+    {% endfor %}
+</table>

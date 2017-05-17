@@ -12,8 +12,12 @@ lucky_number:
 
 lucky_form:
     path:   /lucky/form
-    defaults: { _controller: AppBundle:Lucky:form}
+    defaults: { _controller: AppBundle:Lucky:form }
 
-#lucky_db:
-#    path:   /lucky/db
-#    defaults: { _controller: AppBundle:Lucky:db}
+lucky_find:
+    path:   /lucky/find
+    defaults: { _controller: AppBundle:Lucky:find }
+
+lucky_show:
+    path:   /lucky/show
+    defaults: { _controller: AppBundle:Lucky:show }
