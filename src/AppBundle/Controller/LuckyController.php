@@ -70,4 +70,13 @@ class LuckyController extends Controller
 
         return $this->render('lucky/luckydb.html.twig', array('dbtable' => $dbtable));
     }
+
+    public function eraseAction(Request $request){
+        $numberid = $request->get('contentid');
+        $em = $this->getDoctrine()->getManager();
+        $toerase = $em->getRepository('AppBundle:Number')->find($numberid);
+        $em->remove($toerase);
+        $em->flush();
+        return new Response("Erased entry with ID " .$numberid);
+    }
 }
