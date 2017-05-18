@@ -24,7 +24,6 @@ class Number
      */
     private $createdAt;
 
-
     /**
      * Get id
      *

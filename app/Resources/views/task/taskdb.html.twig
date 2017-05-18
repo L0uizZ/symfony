@@ -1,0 +1,16 @@
+{# app/Ressources/views/lucky/number.html.twig #}
+<table>
+    <h3>Task DB</h3>
+    <h4>Entries:</h4>
+    {% for c in dbtable %}
+        <tr>
+            <td>ID: {{ c.id }}</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>TASK: {{ c.task }}</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>DUE: {{ c.dueDate.format('d.m.Y H:i:s') }}</td>
+        </tr>
+    {% endfor %}
+</table>

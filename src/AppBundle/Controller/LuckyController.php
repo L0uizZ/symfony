@@ -8,13 +8,19 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use AppBundle\Entity\Number;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class LuckyController extends Controller
 {
 
     public function numberAction($max)
     {
-        if($max>1000||$max<0){
+        if ($max > 1000 || $max < 0) {
             throw new UnexpectedValueException("Invalid Range!");
         } else {
             $number = mt_rand(0, $max);
@@ -28,7 +34,7 @@ class LuckyController extends Controller
     {
         $numbrange = $request->get('numbrange');
 
-        if($numbrange>1000||$numbrange<0){
+        if ($numbrange > 1000 || $numbrange < 0) {
             throw new \UnexpectedValueException("Invalid Range!");
         } else {
 
@@ -56,10 +62,10 @@ class LuckyController extends Controller
 
         $foundcontent = $repository->findById($numberid);
 
-        if(!$dbcontent){
-            throw new \UnexpectedValueException('No DB entry found for ID '.$numberid);
+        if (!$dbcontent) {
+            throw new \UnexpectedValueException('No DB entry found for ID ' . $numberid);
         } else {
-            echo '<b>Found an entry for ID </b>' .$numberid;
+            echo '<b>Found an entry for ID </b>' . $numberid;
             return $this->render('lucky/luckydb.html.twig', array('dbtable' => $foundcontent));
 
 
@@ -75,24 +81,40 @@ class LuckyController extends Controller
     }
 
 
-    public function eraseAction(Request $request){
+    public function eraseAction(Request $request)
+    {
         $numberid = $request->get('contentid');
         $em = $this->getDoctrine()->getManager();
         $toerase = $em->getRepository('AppBundle:Number')->find($numberid);
 
-        if(!$toerase)
-        {
-            throw new \UnexpectedValueException('No DB entry found for ID '.$numberid);
+        if (!$toerase) {
+            throw new \UnexpectedValueException('No DB entry found for ID ' . $numberid);
 
         } else {
 
             $em->remove($toerase);
             $em->flush();
-            return new Response("Erased entry with ID " .$numberid);
+            return new Response("Erased entry with ID " . $numberid);
         }
     }
-}
 
+    public function updateAction(Request $request)
+    {
+
+        $numberid = $request->get('contentid');
+        $em = $this->getDoctrine()->getManager();
+        $toupdate = $em->getRepository('AppBundle:Number')->find($numberid);
+        if (!$toupdate) {
+            throw new \UnexpectedValueException('No DB entry found for ID ' . $numberid);
+        }
+        $toupdate->setNumber('1000');
+        $toupdate->setCreatedAt(new \DateTime());
+        $em->flush();
+
+        return new Response('Updated entry with ID ' . $numberid);
+    }
+
+}
 # update
 # formbundle formtypes
 # services dependency

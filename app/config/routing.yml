@@ -21,3 +21,19 @@ lucky_find:
 lucky_show:
     path:   /lucky/show
     defaults: { _controller: AppBundle:Lucky:show }
+
+lucky_erase:
+    path:   /lucky/erase
+    defaults: { _controller: AppBundle:Lucky:erase }
+
+lucky_update:
+    path:   /lucky/update
+    defaults: { _controller: AppBundle:Lucky:update }
+
+task_new:
+    path:   /task/new
+    defaults: { _controller: AppBundle:Task:new }
+
+task_show:
+    path:   /task/show
+    defaults: { _controller: AppBundle:Task:show }

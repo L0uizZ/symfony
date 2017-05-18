@@ -14,16 +14,31 @@
         <ul>
             <li><a href="/app_dev.php">Home</a></li>
             <li><a href="/app_dev.php/lucky/number/{{ value }}">Random numbers</a></li>
-            <li><a href="/app_dev.php/lucky/show">Show DB</a></li><br/><br/>
+            <li><a href="/app_dev.php/task/new">Task Formbuilder</a></li>
+            <li><a href="/app_dev.php/lucky/show">Show Lucky DB</a></li>
+            <li><a href="/app_dev.php/task/show">Show Task DB</a></li>
+            <br/><br/>
         </ul>
             <form action="/app_dev.php/lucky/form" method="post">
                 <h3>DB Poster</h3>
-                <p>Number range(0,1000):&nbsp;<input type="text" name="numbrange" /></p>
+                <p>Range(0,1000):&nbsp;<input type="text" name="numbrange" /></p>
                 <p><input type="submit" /></p>
             </form>
             </br>
             <form action="/app_dev.php/lucky/find" method="post">
                 <h3>DB Finder</h3>
+                <p>Entry ID:&nbsp;<input type="text" name="contentid" /></p>
+                <p><input type="submit" /></p>
+            </form>
+            <br/>
+            <form action="/app_dev.php/lucky/erase" method="post">
+                <h3>DB Eraser: </h3>
+                <p>Entry ID:&nbsp;<input type="text" name="contentid" /></p>
+                <p><input type="submit" /></p>
+            </form>
+            <br/>
+            <form action="/app_dev.php/lucky/update" method="post">
+                <h3>DB Updater: </h3>
                 <p>Entry ID:&nbsp;<input type="text" name="contentid" /></p>
                 <p><input type="submit" /></p>
             </form>
