@@ -30,6 +30,10 @@ lucky_update:
     path:   /lucky/update
     defaults: { _controller: AppBundle:Lucky:update }
 
+lucky_service:
+    path:  /lucky/service
+    defaults: { _controller: AppBundle:Lucky:service }
+
 task_new:
     path:   /task/new
     defaults: { _controller: AppBundle:Task:new }

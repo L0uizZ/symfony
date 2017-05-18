@@ -20,16 +20,6 @@ class LuckyController extends Controller
 
     public function numberAction($max)
     {
-        $messageGenerator = $this->container->get('app.message_generator');
-        $message = $messageGenerator->getHappyMessage();
-        $this->addFlash('success', $message);
-
-        $logger = $this->container->get('logger');
-        $logger->info('Look! I just used a service');
-
-        echo $message;
-
-
         if ($max > 1000 || $max < 0) {
             throw new UnexpectedValueException("Invalid Range!");
         } else {
@@ -122,6 +112,17 @@ class LuckyController extends Controller
         $em->flush();
 
         return new Response('Updated entry with ID ' . $numberid);
+    }
+
+    public function serviceAction(){
+        $messageGenerator = $this->container->get('app.message_generator');
+        $message = $messageGenerator->getHappyMessage();
+        $this->addFlash('success', $message);
+
+        $logger = $this->container->get('logger');
+        $logger->info('Look! I just used a service');
+
+        return new Response($message);
     }
 
 }
