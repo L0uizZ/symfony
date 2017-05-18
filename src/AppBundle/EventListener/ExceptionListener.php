@@ -12,7 +12,7 @@ class ExceptionListener
     {
         $exception = $event->getException();
         $message = sprintf(
-            'Event-ExceptionListener Error says: %s',
+            'Event-Exception-Listener Error says: %s',
             $exception->getMessage(),
             $exception->getCode()
         );

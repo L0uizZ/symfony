@@ -118,13 +118,14 @@ class LuckyController extends Controller
         $message = $messageGenerator->getHappyMessage();
         $this->addFlash('success', $message);
 
+
+
+
         $logger = $this->container->get('logger');
         $logger->info('Look! I just used a service');
+        $logger->error('An error occured');
+        $logger->critical('I left the oven on!', array('cause' => 'in_hurry'));
 
         return new Response($message);
     }
-
 }
-# update
-# formbundle formtypes
-# services dependency
