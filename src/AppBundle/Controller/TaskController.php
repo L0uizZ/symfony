@@ -24,7 +24,7 @@ class TaskController extends Controller
             ->add('dueDate', DateType::class)
             ->add('save', SubmitType::class, array('label'=>'Save Task'))
             ->add('find', SubmitType::class, array('label'=>'Find Task'))
-            ->add('erase', SubmitType::class, array('label'=>'Erase Task'))
+            ->add('eraseone', SubmitType::class, array('label'=>'Erase Task'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -33,19 +33,26 @@ class TaskController extends Controller
         {
             $task = $form->getData();
             $repository = $this->getDoctrine()->getRepository('AppBundle:Task');
+            $em = $this->getDoctrine()->getManager();
 
             if($form->get('save')->isClicked()) {
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($task);
                 $em->flush();
-                return new Response('Saved your Task');
+                return new Response('Task saved!');
             }
             if($form->get('find')->isClicked()) {
                 $dbtable = $repository->findByTask($task->getTask($form->get('task')));
                 return $this->render('task/taskdb.html.twig', array('dbtable' => $dbtable));
             }
-            if($form->get('erase')->isClicked()) {
-
+            if($form->get('eraseone')->isClicked()) {
+                $toerase = $repository->findOneByTask($task->getTask($form->get('task')));
+                if (!$toerase) {
+                    throw new \UnexpectedValueException('No DB entry found for your Task');
+                } else {
+                    $em->remove($toerase);
+                    $em->flush();
+                    return new Response("Task deleted!");
+                }
             }
         }
 

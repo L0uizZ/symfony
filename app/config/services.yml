@@ -10,3 +10,7 @@ services:
     app.exception_controller:
         class: AppBundle\Controller\ExceptionsController
         arguments: ['@twig', '%kernel.debug%']
+
+    app.message_generator:
+        class:  AppBundle\Service\MessageGenerator
+        arguments:  []
