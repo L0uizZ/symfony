@@ -42,7 +42,11 @@ class TaskController extends Controller
             }
             if($form->get('find')->isClicked()) {
                 $dbtable = $repository->findByTask($task->getTask($form->get('task')));
-                return $this->render('task/taskdb.html.twig', array('dbtable' => $dbtable));
+                if (!$dbtable) {
+                    throw new \UnexpectedValueException('No DB entry found for your Task');
+                } else {
+                    return $this->render('task/taskdb.html.twig', array('dbtable' => $dbtable));
+                }
             }
             if($form->get('eraseone')->isClicked()) {
                 $toerase = $repository->findOneByTask($task->getTask($form->get('task')));

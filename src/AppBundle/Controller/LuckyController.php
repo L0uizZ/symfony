@@ -91,7 +91,6 @@ class LuckyController extends Controller
             throw new \UnexpectedValueException('No DB entry found for ID ' . $numberid);
 
         } else {
-
             $em->remove($toerase);
             $em->flush();
             return new Response("Erased entry with ID " . $numberid);

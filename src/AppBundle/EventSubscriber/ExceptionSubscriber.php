@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -9,6 +10,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents()
     {
+
         return array(
             KernelEvents::EXCEPTION => array(
                 array('processException', 10),
@@ -20,16 +22,16 @@ class ExceptionSubscriber implements EventSubscriberInterface
 
     public function processException(GetResponseForExceptionEvent $event)
     {
-
+    // ...
     }
 
     public function logException(GetResponseForExceptionEvent $event)
     {
-
+    // ...
     }
 
     public function notifyException(GetResponseForExceptionEvent $event)
     {
-
+    // ...
     }
 }
