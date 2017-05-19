@@ -13,7 +13,6 @@ class MessageGenerator
 
     private $logger;
     private $loggingEnabled;
-    private $mailer;
 
     public function  __construct(LoggerInterface $logger, $loggingEnabled)
     {
@@ -24,18 +23,16 @@ class MessageGenerator
     public function getHappyMessage()
     {
 
+        if($this->loggingEnabled){
+            $this->logger->info('About to find a happy message!');
+        }
+
         $messages = [
             'You did it! You updated the system! Amazing!',
             'That was one of the coolest updates I\'ve seen all day!',
             'Great work! Keep going!',
         ];
         $index = array_rand($messages);
-
-        $mailer = \Swift_Message::newInstance()
-            ->setSubject('Just a Test!')
-            ->setFrom('praktikant@symfony.dev')
-            ->setTo('louis.hinz@hotmail.de')
-            ->setBody($messages[$index]);
 
         return $messages[$index];
     }

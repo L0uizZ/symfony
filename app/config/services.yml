@@ -2,6 +2,7 @@
 # http://symfony.com/doc/current/service_container.html
 parameters:
     #parameter_name: value
+    enable_generator_logging: true
 
 services:
     #service_name:
@@ -13,7 +14,7 @@ services:
 
     app.message_generator:
         class:  AppBundle\Service\MessageGenerator
-        arguments:  ['@logger', true]
+        arguments:  ['@logger', '%enable_generator_logging%' ]
 
     app.exception_listener:
         class:  AppBundle\EventListener\ExceptionListener
