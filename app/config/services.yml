@@ -13,7 +13,7 @@ services:
 
     app.message_generator:
         class:  AppBundle\Service\MessageGenerator
-        arguments:  []
+        arguments:  ['@logger', true]
 
     app.exception_listener:
         class:  AppBundle\EventListener\ExceptionListener

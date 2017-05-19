@@ -117,15 +117,6 @@ class LuckyController extends Controller
         $messageGenerator = $this->container->get('app.message_generator');
         $message = $messageGenerator->getHappyMessage();
         $this->addFlash('success', $message);
-
-
-
-
-        $logger = $this->container->get('logger');
-        $logger->info('Look! I just used a service');
-        $logger->error('An error occured');
-        $logger->critical('I left the oven on!', array('cause' => 'in_hurry'));
-
-        return new Response($message);
+        return new Response($message." <br/><br/> Sent via Mail!");
     }
 }
