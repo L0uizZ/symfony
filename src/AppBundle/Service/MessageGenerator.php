@@ -20,7 +20,7 @@ class MessageGenerator
     public function getHappyMessage()
     {
 
-        $this->logger->info('#################### NEW LOG ####################');
+
 
         $messages = [
             'You did it! You updated the system! Amazing!',
@@ -28,6 +28,9 @@ class MessageGenerator
             'Great work! Keep going!',
         ];
         $index = array_rand($messages);
+
+        $this->logger->info('===> H A P P Y ===> M E S S A G E <=== I N C O M I N G <===');
+        $this->logger->info($messages[$index]);
 
         return $messages[$index];
     }
