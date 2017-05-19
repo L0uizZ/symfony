@@ -115,14 +115,10 @@ class LuckyController extends Controller
 
     public function serviceAction(){
         $messageGenerator = $this->container->get('app.message_generator');
+        $isLoggingEnabled=$this->container->getParameter('enable_generator_logging');
         $message = $messageGenerator->getHappyMessage();
         $this->addFlash('success', $message);
 
-        $isLoggingEnabled=$this->container->getParameter('enable_generator_logging');
-
-        if($isLoggingEnabled==1){
-         echo "Logging: TRUE";
-        }
         return new Response($message."");
     }
 }

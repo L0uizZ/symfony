@@ -8,9 +8,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class MessageGenerator
 {
-    #SERVICES DOESNT HAVE CONTAINER $this->container PROPERTY (ONLY CONTROLLERS)
-    #CREATING A __contrsuct() method with $mailer ARGUMENT AND SET PROPERTY
-
     private $logger;
     private $loggingEnabled;
 
@@ -23,9 +20,7 @@ class MessageGenerator
     public function getHappyMessage()
     {
 
-        if($this->loggingEnabled){
-            $this->logger->info('About to find a happy message!');
-        }
+        $this->logger->info('#################### NEW LOG ####################');
 
         $messages = [
             'You did it! You updated the system! Amazing!',
